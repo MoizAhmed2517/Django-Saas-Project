@@ -1,3 +1,5 @@
+# Set the python version as a build-time argument
+# with Python 3.12 as the default
 ARG PYTHON_VERSION=3.12-slim-bullseye
 FROM python:${PYTHON_VERSION}
 
@@ -24,7 +26,6 @@ RUN apt-get update && apt-get install -y \
     libcairo2 \
     # other
     gcc \
-    nano \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the mini vm's code directory
@@ -41,6 +42,11 @@ COPY ./src /code
 
 # Install the Python project requirements
 RUN pip install -r /tmp/requirements.txt
+
+# database isn't available during build
+# run any other commands that do not need the database
+# such as:
+# RUN python manage.py collectstatic --noinput
 
 # set the Django default project name
 ARG PROJ_NAME="saas"
