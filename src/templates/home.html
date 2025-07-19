@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Homepage - {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+    <h1>Welcome to our {{ page_title }}!</h1>
+    <p>
+        {{ request.user }} | {{ request.method }} | {{ request.user.is_authenticated }}
+    </p>
+
+    {% include 'snippets/welcome-user-msg.html' %}
+
+    <br/>
+    <p>{{ queryset }}</p>
+
+    <br/>
+    <p>Page visit count: {{ page_visit_count }}</p>
+
+    <br/>
+    <p>Total visits: {{ total_visits }}</p>
+
+    <br/>
+    <p>Page visit percentage: {{ page_visit_percentage }}%</p>
+{% endblock %}
+
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h1>Welcome to our {{page_title}}!</h1>
+        <p>
+            {{request.user}} | {{ request.method}} | {{ request.user.is_authenticated }} 
+        </p>
+    </body>
+</html> {% endcomment %}
+
+
+
