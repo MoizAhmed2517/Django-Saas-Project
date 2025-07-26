@@ -31,7 +31,7 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
 # Copy project code
-COPY ./src /code
+COPY ./src/ /code/
 
 # Set project name argument with default
 ARG PROJ_NAME="saas"
