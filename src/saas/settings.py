@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-rsjn_(+ou0tt_-jhuh%o@u_en_)htzifqpn_%=@vk_mzh6-9(+
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'django-saas-project-production-2379.up.railway.app'
+    'django-saas-project-production-2379.up.railway.app',
     '.up.railway.app',
 ]
 
