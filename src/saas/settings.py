@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '.railway.app' # Allow all subdomains of railway.app
+    '.up.railway.app',
 ]
 
 if DEBUG:
