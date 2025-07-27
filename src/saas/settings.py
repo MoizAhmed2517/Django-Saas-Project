@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'visits',  # Custom app for tracking page visits
+    'commando'
 ]
 
 MIDDLEWARE = [
@@ -86,7 +87,16 @@ WSGI_APPLICATION = 'saas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASE_URL = config("DATABASE_URL", cast=str)
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+DATABASE_URL = config("DATABASE_URL", default=None)
 CONN_MAX_AGE = config("CONN_MAX_AGE", default=30, cast=int)
 
 if DATABASE_URL is not None:
@@ -97,13 +107,6 @@ if DATABASE_URL is not None:
             conn_health_checks=True,
         )
     }
-else:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -140,6 +143,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_BASE_DIRS = BASE_DIR / 'staticfiles'
+STATICFILES_BASE_DIRS.mkdir(parents=True, exist_ok=True)
+STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIRS / 'vendor'
+
+# sources for python manage.py collectstatic
+STATICFILES_DIRS = [
+    STATICFILES_BASE_DIRS
+]
+
+# output for python manage.py collectstatic
+## Local CDN
+STATIC_ROOT = BASE_DIR / 'local-cdn'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
