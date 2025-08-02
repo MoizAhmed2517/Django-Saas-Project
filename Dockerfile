@@ -33,6 +33,15 @@ RUN pip install -r /tmp/requirements.txt
 # Copy project code
 COPY ./src/ /code/
 
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+ARG DEBUG=0
+ENV DEBUG=${DEBUG}
+
+RUN python manage.py vendor_pull
+RUN python manage.py collectstatic --noinput
+
 # Set project name argument with default
 ARG PROJ_NAME="saas"
 

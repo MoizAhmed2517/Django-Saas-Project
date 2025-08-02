@@ -1,0 +1,5 @@
+## Ignore static files
+saas_foundation\src\staticfiles
+
+## Ignore local CDN files
+local-cdn/
