@@ -39,7 +39,8 @@ ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
 ARG DEBUG=0
 ENV DEBUG=${DEBUG}
 
-RUN python manage.py vendor_pull
+
+RUN python manage.py vendor_pull  
 RUN python manage.py collectstatic --noinput
 
 # Set project name argument with default
